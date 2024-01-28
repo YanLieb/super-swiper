@@ -1,0 +1,91 @@
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.bloc-before {
+  height: 150svh;
+  width: 100%;
+  background-color: skyblue;
+}
+
+.bloc-after {
+  height: 150svh;
+  width: 100%;
+  background-color: tomato;
+}
+
+.slide {
+  position: relative;
+}
+.image {
+  width: fit-content;
+}
+.image::before {
+  content: "";
+  display: block;
+  width: 50%;
+  background-image: var(--img-src);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} 
+
+.image::after {
+  content: "";
+  display: block;
+  background-image: var(--img-src);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 100svh;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transition: all 0.5s;
+}
+
+.image:not(:first-child)::after {
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.5s;
+}
+
+.image:hover {
+  &::after {
+    opacity: 1;
+    z-index: 1;
+  }
+}
+
+.image:first-child::before {
+  width: 400px;
+  aspect-ratio: 3/2;
+  transform: translate(40%,50%);
+}
+
+.image:nth-child(2)::before {
+  width: 200px;
+  aspect-ratio: 5/4;
+  transform: translate(30%,0)
+}
+
+.image:last-child::before {
+  width: 150px;
+  aspect-ratio: 1;
+  transform: translate(450px,-50%)
+}
+
+.swiper {
+  height: 100svh;
+  background-color: lightseagreen;
+}
+
+.fixed { 
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
