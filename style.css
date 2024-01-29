@@ -18,9 +18,27 @@ img {
 .slide {
   position: relative;
 }
+
+.slide-container {
+  width: 50%;
+  height: 100%;
+}
+
+
+.images-wrapper {
+  width: 400px;
+  height: 100%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  justify-content: center;
+  align-content: center;
+}
+
 .image {
   width: fit-content;
 }
+
 .image::before {
   content: "";
   display: block;
@@ -29,7 +47,7 @@ img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-} 
+}
 
 .image::after {
   content: "";
@@ -46,10 +64,12 @@ img {
   transition: all 0.5s;
 }
 
-.image:not(:first-child)::after {
-  opacity: 0;
-  z-index: -1;
-  transition: all 0.5s;
+.image:not(:first-child) {
+  &::after {
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.5s;
+  }
 }
 
 .image:hover {
@@ -59,22 +79,28 @@ img {
   }
 }
 
-.image:first-child::before {
-  width: 400px;
-  aspect-ratio: 3/2;
-  transform: translate(40%,50%);
+.image:first-child {
+  grid-column: span 2;
+  
+  &::before {
+    width: 400px;
+    aspect-ratio: 3/2;
+  }
 }
 
-.image:nth-child(2)::before {
-  width: 200px;
-  aspect-ratio: 5/4;
-  transform: translate(30%,0)
+.image:nth-child(2) {
+  &::before {
+    width: 200px;
+    aspect-ratio: 5/4;
+  }
 }
 
-.image:last-child::before {
-  width: 150px;
-  aspect-ratio: 1;
-  transform: translate(450px,-50%)
+.image:last-child {
+  justify-self: end;
+  &::before {
+    width: 150px;
+    aspect-ratio: 1;
+  }
 }
 
 .swiper {
@@ -82,10 +108,28 @@ img {
   background-color: lightseagreen;
 }
 
-.fixed { 
+.fixed {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+h2 {
+  font-family: "Arial Narrow", sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 250ms ease-in-out 300ms, transform 400ms ease-in;
+}
+
+.slide:not(.swiper-slide-visible) {
+  h2 {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: opacity 250ms ease-in-out, transform 400ms ease-in 300ms ;
+  }
 }
